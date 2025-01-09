@@ -11,8 +11,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+set(BUILD_TYPE "Release")
+if(CMAKE_BUILD_TYPE AND (CMAKE_BUILD_TYPE STREQUAL "Debug"))
+    set(BUILD_TYPE "Debug")
+endif()
 
-SET(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "Installation path" FORCE)
+SET(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install/${BUILD_TYPE} CACHE PATH "Installation path" FORCE)
 add_definitions(-DELAWIDGETTOOLS_LIBRARY)
 option(ELAWIDGETTOOLS_BUILD_STATIC_LIB "Build static library." ON)
 
